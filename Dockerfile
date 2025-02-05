@@ -29,10 +29,12 @@ rm /tmp/chromedriver.zip
 
 
 # Устанавливаем рабочую директорию
-WORKDIR /business-registration-api-1
+WORKDIR /business-registration-api-1/app
+
+
 
 # Копируем файлы проекта
-COPY . .
+COPY app /business-registration-api-1/app
 
 
 # Устанавливаем зависимости Python
@@ -42,5 +44,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Команда для запуска API
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
