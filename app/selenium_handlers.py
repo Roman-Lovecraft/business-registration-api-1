@@ -39,6 +39,13 @@ def fill_form_oregon(credentials, data) -> str:
         login_button.click()
 
         time.sleep(5)
+        #  ВАЖНО!!! Если ранее не были созданы шаблоны с этого акка, то строки 43-47 нужно удалить
+        no_button = driver.find_element(By.ID, "cancelButton")
+        no_button.click()  
+        no_button = driver.find_element(By.ID, "cancelButton")
+        no_button.click() 
+
+        time.sleep(5)
 
         # Клик по кнопке Start
         register_business_start_button = driver.find_element(By.ID, "startBusinessButtonID")

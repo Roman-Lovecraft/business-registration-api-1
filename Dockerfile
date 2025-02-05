@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libnss3 \
     libgconf-2-4 \
+    gnupg \
+    curl \
     libfontconfig1 \
     && rm -rf /var/lib/apt/lists/*
 
