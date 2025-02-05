@@ -1,6 +1,18 @@
 # Используем официальный базовый образ Python
 FROM python:3.9-slim
 
+# Устанавливаем рабочую директорию внутри контейнера
+WORKDIR /business-registration-api-1
+
+# Копируем requirements.txt перед установкой зависимостей
+COPY requirements.txt /business-registration-api-1/
+
+# Устанавливаем зависимости
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем весь код приложения в контейнер
+COPY . /business-registration-api-1/app/
+
 # Устанавливаем зависимости для работы Chrome
 RUN apt-get update && apt-get install -y \
     wget \
@@ -28,21 +40,12 @@ unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
 rm /tmp/chromedriver.zip
 
 
-# Устанавливаем рабочую директорию
-WORKDIR /business-registration-api-1/app
 
 
-
-# Копируем файлы проекта
-COPY app /business-registration-api-1/app
-
-
-# Устанавливаем зависимости Python
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Открываем порт для uvicorn
+# Открываем порт для сервера
 EXPOSE 8000
 
-# Команда для запуска API
+# Запускаем приложение
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
 
