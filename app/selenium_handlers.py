@@ -40,15 +40,14 @@ def fill_form_oregon(credentials, data) -> str:
 
         time.sleep(5)
         #  ВАЖНО!!! Если ранее не были созданы шаблоны с этого акка, то строки 43-47 нужно удалить
-        no_button = driver.find_element(By.ID, "cancelButton")
-        no_button.click()  
-        no_button = driver.find_element(By.ID, "cancelButton")
-        no_button.click() 
+        cancel_button = wait.until(EC.element_to_be_clickable((By.ID, "cancelButton"))) 
+        cancel_button.click()  
 
-        time.sleep(5)
+
+
 
         # Клик по кнопке Start
-        register_business_start_button = driver.find_element(By.ID, "startBusinessButtonID")
+        register_business_start_button =  wait.until(EC.element_to_be_clickable((By.ID, "startBusinessButtonID")))
         register_business_start_button.click()
 
         wait.until(EC.number_of_windows_to_be(2))
@@ -302,13 +301,15 @@ def fill_form_oregon(credentials, data) -> str:
             EC.element_to_be_clickable((By.ID, "pageButton1"))
         )
         ok_button.click()
-        time.sleep(60)
+        
 
-        # Предположим, что после успешной отправки формы появляется элемент с идентификатором applicationId
-        application_id_element = wait.until(EC.presence_of_element_located((By.ID, "applicationId")))
-        application_id = application_id_element.text
+        # возвращаем JSON с подтверждением
+        response = {
+            "registration_completed": True,
+            "message": "Registration successful"
+        }
 
-        return application_id
+        return response
 
     finally:
         driver.quit()

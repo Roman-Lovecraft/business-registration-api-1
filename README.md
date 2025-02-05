@@ -34,7 +34,7 @@ bash
 Копировать
 Редактировать
 uvicorn app.main:app --reload
-API будет доступно по адресу: http://localhost:8000
+API будет доступно по адресу: http://127.0.0.1:8000/docs
 
 С использованием Docker
 Соберите Docker-образ:

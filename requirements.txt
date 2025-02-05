@@ -3,3 +3,6 @@ uvicorn
 pydantic
 selenium
 pydantic[email]
+app
+pydantic
+typing

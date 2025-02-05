@@ -11,8 +11,10 @@ async def register_business(payload: RequestPayload):
     Возвращает {"status": "success", "application_id": "...", "state": "..."} или сообщение об ошибке.
     """
     try:
-        # Здесь можно добавить дополнительную валидацию, если потребуется
+        # Запуск функции для выбранного штата
         application_id = selenium_handlers.fill_form(payload.state, payload.credentials, payload.data)
+        
+        # Ответ в формате JSON
         return {"status": "success", "application_id": application_id, "state": payload.state.upper()}
 
     except ValueError as ve:
@@ -23,3 +25,4 @@ async def register_business(payload: RequestPayload):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+
