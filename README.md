@@ -36,19 +36,19 @@ bash
 uvicorn app.main:app --reload
 API будет доступно по адресу: http://127.0.0.1:8000/docs
 
-С использованием Docker
+### С использованием Docker
 Соберите Docker-образ:
 
 bash
 Копировать
 Редактировать
-docker build -t business-registration-api .
+docker build -t business-registration-api-1 .
 Запустите контейнер:
 
 bash
 Копировать
 Редактировать
-docker run -d -p 8000:8000 business-registration-api
+docker run -d -p 8000:8000 business-registration-api-1
 API будет доступно по адресу: http://localhost:8000
 
 Пример JSON-запроса
