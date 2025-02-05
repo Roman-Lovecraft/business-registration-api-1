@@ -29,10 +29,10 @@ rm /tmp/chromedriver.zip
 
 
 # Устанавливаем рабочую директорию
-WORKDIR /app
+WORKDIR /business-registration-api-1
 
 # Копируем файлы проекта
-COPY . /app/
+COPY . /business-registration-api-1/
 
 
 # Устанавливаем зависимости Python
