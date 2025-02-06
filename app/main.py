@@ -12,18 +12,16 @@ async def register_business(response: RequestResponse):
     """
     try:
         # Запуск функции для выбранного штата
-        response = selenium_handlers.fill_form(response.state, response.credentials, response.data)
+        response_data = selenium_handlers.fill_form(response.state, response.credentials, response.data)
         
         # Ответ в формате JSON
-        return {"status": "success", "response": response, "state": response.get('state', '').upper()}
+        return {"status": "success", "response": response_data, "state": response.state.upper()}
 
     except ValueError as ve:
-        raise HTTPException(status_code=400, detail={"status": "error", "message": str(ve), "state": response.get('state', '').upper()})
+        raise HTTPException(status_code=400, detail={"status": "error", "message": str(ve), "state": response.state.upper()})
     except Exception as e:
-        raise HTTPException(status_code=500, detail={"status": "error", "message": str(e), "state": response.get('state', '').upper()})
+        raise HTTPException(status_code=500, detail={"status": "error", "message": str(e), "state": response.state.upper()})
 
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
-
-
