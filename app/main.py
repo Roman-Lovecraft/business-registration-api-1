@@ -8,14 +8,14 @@ app = FastAPI(title="Business Registration API")
 async def register_business(payload: RequestPayload):
     """
     Принимает JSON с данными регистрации, валидирует их и заполняет форму на сайте.
-    Возвращает {"status": "success", "application_id": "...", "state": "..."} или сообщение об ошибке.
+    Возвращает {"status": "success", "response": "...", "state": "..."} или сообщение об ошибке.
     """
     try:
         # Запуск функции для выбранного штата
-        application_id = selenium_handlers.fill_form(payload.state, payload.credentials, payload.data)
+        response = selenium_handlers.fill_form(payload.state, payload.credentials, payload.data)
         
         # Ответ в формате JSON
-        return {"status": "success", "application_id": application_id, "state": payload.state.upper()}
+        return {"status": "success", "response": response, "state": payload.state.upper()}
 
     except ValueError as ve:
         raise HTTPException(status_code=400, detail={"status": "error", "message": str(ve), "state": payload.state.upper()})
