@@ -64,7 +64,7 @@ class FormData(BaseModel):
     agent: Agent
     organizer: Organizer
 
-class RequestPayload(BaseModel):
+class RequestResponse(BaseModel):
     credentials: Credentials
     state: str = Field(..., min_length=2, max_length=2, description="Двухбуквенное обозначение штата, например, OR")
     data: FormData
